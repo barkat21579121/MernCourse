@@ -1,13 +1,20 @@
 const mongoose = require("mongoose");
+require("dotenv").config({ path: "../.env" });
 
-const URL = "mongodb://localhost:27017/Mern_Stack";
+// const URL = process.env.DB_URL;
 
-const DbConnection = async () => {
+console.log(URL);
+
+const DbConnection = async (URL) => {
   try {
-    await mongoose.connect(URL);
-    console.log("DB connected ");
+    await mongoose.connect(URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: false,
+    });
+    console.log("DB connected");
   } catch (error) {
-    console.log(error);
+    console.error("Error connecting to database:", error);
   }
 };
+
 module.exports = DbConnection;

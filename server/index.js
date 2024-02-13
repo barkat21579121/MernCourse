@@ -2,13 +2,16 @@ const express = require("express");
 const router = require("./Router/index");
 const DbConnection = require("./Utils/Db");
 const app = express();
+const dotEnv = require("dotenv");
+dotEnv.config();
 
+console.log("::::", process.env.DB_URL);
 app.use(express.json());
 app.use("/api/auth", router);
 
-const Port = process.env.PORT || 3001;
+const Port = 3001;
 
-DbConnection().then(() => {
+DbConnection(process.env.DB_URL).then(() => {
   app.listen(Port, () => {
     console.log(`app is listining on post no ${Port}`);
   });
