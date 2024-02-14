@@ -5,7 +5,6 @@ const app = express();
 const dotEnv = require("dotenv");
 dotEnv.config();
 
-console.log("::::", process.env.DB_URL);
 app.use(express.json());
 app.use("/api/auth", router);
 
