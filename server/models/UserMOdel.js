@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
 //*___________________
 //* JWT generateToken function
 //*___________________
-console.log("jwt", process.env.JWT_KEY);
+
 userSchema.methods.generateToken = function () {
   return JWT.sign(
     {

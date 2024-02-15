@@ -40,5 +40,30 @@ const register = async (req, res) => {
     userID: userCreated._id.toString(),
   });
 };
+//*___________________
+//* Logic for Login
+//*___________________
 
-module.exports = { Home, register };
+const LoginUser = async (req, res) => {
+  const { email, password } = req.body;
+  ///checking email is valid or not
+  const userExist = await Users.findOne({ email });
+
+  if (!userExist) {
+    res.status(400).send("invalid credencials");
+  }
+  const user = await bcrypt.compare(password, userExist.password);
+  console.log(user);
+
+  if (user) {
+    res.status(200).json({
+      message: "login sucessFully",
+      token: await userExist.generateToken(),
+      userID: userExist._id.toString(),
+    });
+  } else {
+    res.status(401).json("invalid email/password");
+  }
+};
+
+module.exports = { Home, register, LoginUser };
