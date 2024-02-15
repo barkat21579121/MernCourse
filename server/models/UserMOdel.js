@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const JWT = require("jsonwebtoken");
 
 const userSchema = mongoose.Schema({
   name: {
@@ -22,6 +23,23 @@ const userSchema = mongoose.Schema({
     default: false,
   },
 });
+//*___________________
+//* JWT generateToken function
+//*___________________
+console.log("jwt", process.env.JWT_KEY);
+userSchema.methods.generateToken = function () {
+  return JWT.sign(
+    {
+      userID: this._id.toString(),
+      email: this.email,
+      isAdmin: this.isAdmin,
+    },
+    process.env.JWT_KEY,
+    {
+      expiresIn: "30d",
+    }
+  );
+};
 
 const Users = new mongoose.model("User", userSchema);
 
