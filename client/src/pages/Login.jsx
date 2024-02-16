@@ -4,47 +4,56 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   const [user, setUser] = useState({
-    password: "",
     email: "",
+    password: "",
   });
+
   const handleOnChange = (e) => {
     setUser({
       ...user,
       [e.target.id]: e.target.value,
     });
   };
+
+  const handleOnclick = (e) => {
+    e.preventDefault();
+    console.log(user);
+  };
+
   return (
-    <div class="wrapper">
-      <div class="logo">
+    <div className="wrapper">
+      <div className="logo">
         <img src="" alt="" />
       </div>
-      <div class="text-center mt-4 name">Login</div>
-      <form class="p-3 mt-3">
-        <div class="form-field d-flex align-items-center">
-          <span class="far fa-user"></span>
+      <div className="text-center mt-4 name">Login</div>
+      <form className="p-3 mt-3" onSubmit={handleOnclick}>
+        <div className="form-field d-flex align-items-center">
+          <span className="far fa-user"></span>
           <input
-            type="text"
-            name="userName"
-            id="userName"
+            type="email"
+            name="email"
+            id="email"
             placeholder="Email"
             value={user.email}
+            onChange={handleOnChange}
           />
         </div>
-        <div class="form-field d-flex align-items-center">
-          <span class="fas fa-key"></span>
+        <div className="form-field d-flex align-items-center">
+          <span className="fas fa-key"></span>
           <input
             type="password"
             name="password"
-            id="pwd"
+            id="password"
+            onChange={handleOnChange}
             value={user.password}
             placeholder="Password"
           />
         </div>
-        <button class="btn mt-3" type="submit">
+        <button className="btn mt-3" type="submit">
           Login
         </button>
       </form>
-      <div class="text-center fs-6">
+      <div className="text-center fs-6">
         <Link to="/register">Sign up</Link>
       </div>
     </div>
