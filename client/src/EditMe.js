@@ -82,7 +82,7 @@ export let information = {
   fullName: "Barkat Ullah", // Name in Profile Banner
   welcomeMsg: "Welcome! I am,", // Welcome subheading above Name
   aboutMe: "SoftWare Developer!", // Short Description
-  companyName: " Dev @ Qubit", // Your position @ a Company
+  companyName: " Dev @ Qubit Technologies", // Your position @ a Company
   // Replace with the URL to your image (URL or Local Image)
   profilePhoto:
     "https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg",

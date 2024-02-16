@@ -23,7 +23,10 @@ const Login = () => {
   return (
     <div className="wrapper">
       <div className="logo">
-        <img src="" alt="" />
+        <img
+          src="	https://avatars.githubusercontent.com/u/148468513?v=4"
+          alt=""
+        />
       </div>
       <div className="text-center mt-4 name">Login</div>
       <form className="p-3 mt-3" onSubmit={handleOnclick}>
