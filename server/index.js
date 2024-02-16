@@ -5,8 +5,9 @@ const app = express();
 const dotEnv = require("dotenv");
 const errorHandler = require("./middleware-Validator/ErrorHandler");
 const ContactRoute = require("./Router/contactRoute");
+var cors = require("cors");
 dotEnv.config();
-
+app.use(cors());
 app.use(express.json());
 app.use("/api/auth", router);
 app.use("/api/form", ContactRoute);

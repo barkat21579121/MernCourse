@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -21,11 +21,27 @@ function Contact() {
       [name]: value,
     });
   };
+  const Url = "http://localhost:3001/api/form/contact";
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    setSubmitSuccess(true);
+    // Reset any previous error state
+    setSubmitError(false);
+
+    axios
+      .post("http://localhost:3001/api/form/contact", {
+        name: formData.name,
+        email: formData.emailAddress,
+        message: formData.message,
+      })
+      .then((res) => {
+        console.log("Response:", res.data);
+        setSubmitSuccess(true);
+      })
+      .catch((err) => {
+        console.log("Error:", err);
+        setSubmitError(true);
+      });
   };
 
   return (
