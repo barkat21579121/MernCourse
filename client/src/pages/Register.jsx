@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -19,6 +20,16 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(user);
+    axios
+      .post("http://localhost:3001/api/auth/register", {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        phone: user.phone,
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
   };
 
   return (
@@ -55,13 +66,13 @@ const Register = () => {
                         <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                         <div className="form-outline flex-fill mb-0">
                           <input
-                            type="email"
+                            type="text"
                             id="email"
                             className="form-control"
                             value={user.email}
                             onChange={handleChange}
                           />
-                          <label className="form-label" htmlFor="email">
+                          <label className="form-label" htmlFor="">
                             Your Email
                           </label>
                         </div>

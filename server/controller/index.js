@@ -15,7 +15,7 @@ const register = async (req, res) => {
   console.log(" requested data", req.body);
   const emailExists = await Users.findOne({ email });
   if (emailExists) {
-    return res.status(400).send("user already exist ");
+    return res.status(400).send({ message: "user already exist " });
   }
   //*___________________
   //* hashed password

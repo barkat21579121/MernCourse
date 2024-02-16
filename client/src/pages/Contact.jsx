@@ -21,7 +21,6 @@ function Contact() {
       [name]: value,
     });
   };
-  const Url = "http://localhost:3001/api/form/contact";
 
   const handleSubmit = (e) => {
     e.preventDefault();
