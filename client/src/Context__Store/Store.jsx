@@ -11,6 +11,7 @@ export const TokenProvider = ({ children }) => {
   };
 
   const HandleToggle = !!remToken;
+
   const deleteToken = () => {
     setRemToken("");
     return localStorage.removeItem("token");
@@ -24,9 +25,10 @@ export const TokenProvider = ({ children }) => {
         .get("http://localhost:3001/api/auth/user", config)
         .then((res) => {
           setData(res.data.msg);
-          console.log(res.data.msg);
         });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     userAuthentication();

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useToken } from "../../Context__Store/Store";
 import { Button } from "react-bootstrap";
@@ -12,11 +12,10 @@ const Navbar = () => {
   };
   const { deleteToken } = useToken();
   const { HandleToggle } = useToken();
-  useEffect(() => {
-    HandleToggle;
-  }, [HandleToggle]);
+
   const handleToken = () => {
     deleteToken();
+    console.log("rendering ");
   };
 
   return (

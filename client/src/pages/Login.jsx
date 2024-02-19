@@ -3,6 +3,7 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useToken } from "../Context__Store/Store";
+import { useEffect } from "react";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -10,8 +11,10 @@ const Login = () => {
     password: "",
   });
   const Navigate = useNavigate();
+  const { HandleToggle } = useToken();
 
   const { updateToken } = useToken();
+
   const handleOnChange = (e) => {
     setUser({
       ...user,
@@ -38,7 +41,6 @@ const Login = () => {
         alert(error.response.data);
       });
   };
-
   return (
     <div className="wrapper">
       <div className="logo">
