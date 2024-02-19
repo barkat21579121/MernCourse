@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useToken } from "../Context__Store/Store";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -9,6 +10,7 @@ const Login = () => {
     password: "",
   });
 
+  const { updateToken } = useToken();
   const handleOnChange = (e) => {
     setUser({
       ...user,
@@ -26,6 +28,7 @@ const Login = () => {
       })
       .then((res) => {
         alert(res.data.message);
+        updateToken(res.data.token);
       })
       .catch((error) => {
         console.log(error);

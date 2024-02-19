@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
+import { useToken } from "../Context__Store/Store";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -10,7 +11,7 @@ const Register = () => {
     password: "",
     phone: "",
   });
-
+  const { updateToken } = useToken();
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
@@ -35,13 +36,14 @@ const Register = () => {
         password: user.password,
         phone: user.phone,
       })
-      .then(() => {
+      .then((res) => {
         setUser({
           name: "",
           email: "",
           password: "",
           phone: "",
         });
+        updateToken(res.data.token);
         setModalMessage("User Created Successfully. You can now login.");
         setShowModal(true);
       })
