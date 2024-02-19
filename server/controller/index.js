@@ -65,5 +65,13 @@ const LoginUser = async (req, res) => {
     res.status(401).json("invalid email/password");
   }
 };
+const User = async (req, res) => {
+  try {
+    const UserData = await req.user;
 
-module.exports = { Home, register, LoginUser };
+    res.status(200).json({ msg: UserData });
+  } catch (error) {
+    console.log(error);
+  }
+};
+module.exports = { Home, register, LoginUser, User };

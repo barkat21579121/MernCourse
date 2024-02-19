@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 import { useToken } from "../Context__Store/Store";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -11,6 +12,7 @@ const Register = () => {
     password: "",
     phone: "",
   });
+  const Navigate = useNavigate();
   const { updateToken } = useToken();
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -46,6 +48,9 @@ const Register = () => {
         updateToken(res.data.token);
         setModalMessage("User Created Successfully. You can now login.");
         setShowModal(true);
+        if (res.status === 200) {
+          Navigate("/login");
+        }
       })
       .catch((error) => {
         setModalMessage(error.response.data.message);

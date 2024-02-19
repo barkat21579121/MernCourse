@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useToken } from "../Context__Store/Store";
 
@@ -9,6 +9,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const Navigate = useNavigate();
 
   const { updateToken } = useToken();
   const handleOnChange = (e) => {
@@ -29,9 +30,12 @@ const Login = () => {
       .then((res) => {
         alert(res.data.message);
         updateToken(res.data.token);
+        if (res.status == 200) {
+          Navigate("/");
+        }
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.response.data);
       });
   };
 

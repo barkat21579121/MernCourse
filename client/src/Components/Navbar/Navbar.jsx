@@ -1,12 +1,22 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useToken } from "../../Context__Store/Store";
+import { Button } from "react-bootstrap";
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
+  };
+  const { deleteToken } = useToken();
+  const { HandleToggle } = useToken();
+  useEffect(() => {
+    HandleToggle;
+  }, [HandleToggle]);
+  const handleToken = () => {
+    deleteToken();
   };
 
   return (
@@ -57,20 +67,35 @@ const Navbar = () => {
                   Services
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  to="/register"
-                  onClick={toggleNav}
-                >
-                  Register
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/login" onClick={toggleNav}>
-                  Login
-                </NavLink>
-              </li>
+              {HandleToggle ? (
+                <li className="nav-item">
+                  <Button className="nav-link" onClick={handleToken}>
+                    LogOut
+                  </Button>
+                </li>
+              ) : (
+                <>
+                  {" "}
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link"
+                      to="/register"
+                      onClick={toggleNav}
+                    >
+                      Register
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link"
+                      to="/login"
+                      onClick={toggleNav}
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

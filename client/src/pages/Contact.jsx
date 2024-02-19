@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useToken } from "../Context__Store/Store";
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -11,6 +12,18 @@ function Contact() {
     emailAddress: "",
     message: "",
   });
+  const { data } = useToken();
+  console.log("data", data);
+  useEffect(() => {
+    if (data && formData) {
+      setFormData({
+        emailAddress: data.email,
+        name: data.name,
+        message: "",
+      });
+    }
+  }, []);
+
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
