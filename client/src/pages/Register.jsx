@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 
 const Register = () => {
@@ -9,6 +10,13 @@ const Register = () => {
     password: "",
     phone: "",
   });
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const handleChange = (e) => {
     setUser({
@@ -27,8 +35,19 @@ const Register = () => {
         password: user.password,
         phone: user.phone,
       })
+      .then(() => {
+        setUser({
+          name: "",
+          email: "",
+          password: "",
+          phone: "",
+        });
+        setModalMessage("User Created Successfully. You can now login.");
+        setShowModal(true);
+      })
       .catch((error) => {
-        alert(error.response.data.message);
+        setModalMessage(error.response.data.message);
+        setShowModal(true);
       });
   };
 
@@ -133,6 +152,40 @@ const Register = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        show={showModal}
+        onHide={handleCloseModal}
+        centered
+        style={{
+          backgroundColor: "#f0f0f0",
+          borderRadius: "15px",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Modal.Header
+          closeButton
+          style={{ backgroundColor: "#fff", borderBottom: "none" }}
+        >
+          <Modal.Title style={{ color: "#333" }}>Message</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ padding: "20px" }}>
+          <p style={{ color: "#dc3545" }}>{modalMessage}</p>
+        </Modal.Body>
+        <Modal.Footer style={{ backgroundColor: "#fff", borderTop: "none" }}>
+          <Button
+            variant="secondary"
+            onClick={handleCloseModal}
+            style={{
+              backgroundColor: "#007bff",
+              color: "#fff",
+              border: "none",
+            }}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </section>
   );
 };

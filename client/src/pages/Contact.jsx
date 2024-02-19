@@ -36,6 +36,14 @@ function Contact() {
       .then((res) => {
         console.log("Response:", res.data);
         setSubmitSuccess(true);
+        alert(
+          "you message sent sucessFully . We will shortly contact you via Email"
+        );
+        setFormData({
+          name: "",
+          emailAddress: "",
+          message: "",
+        });
       })
       .catch((err) => {
         console.log("Error:", err);

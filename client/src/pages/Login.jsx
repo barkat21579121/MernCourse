@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -15,9 +16,20 @@ const Login = () => {
     });
   };
 
-  const handleOnclick = (e) => {
+  const handleOnclick = async (e) => {
     e.preventDefault();
-    console.log(user);
+
+    await axios
+      .post("http://localhost:3001/api/auth/login", {
+        email: user.email,
+        password: user.password,
+      })
+      .then((res) => {
+        alert(res.data.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
