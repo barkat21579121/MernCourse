@@ -8,6 +8,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Navbar from "./Components/Navbar/Navbar";
 import AdminPanel from "./Components/Admin/Admin";
+import Users from "./Components/Admin/NustedRoutes/Users";
+import Contacts from "./Components/Admin/NustedRoutes/Contact";
 
 function App() {
   return (
@@ -20,7 +22,10 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin/users" element={<AdminPanel />} />
+        <Route path="/admin" element={<AdminPanel />}>
+          <Route path="users" element={<Users />} />
+          <Route path="contacts" element={<Contacts />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

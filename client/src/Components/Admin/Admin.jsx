@@ -1,37 +1,29 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { NavLink, Outlet } from "react-router-dom";
 
 const AdminPanel = () => {
-  const [records, setRecords] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/admin/users")
-      .then((res) => {
-        const response = res.data;
-        console.log(response);
-        setRecords(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return (
-    <div>
-      <h2>Admin Panel</h2>
-
-      <div>
-        {records.map((record) => (
-          <div key={record.id}>
-            <p>{record.name}</p>
-            <p>{record.email}</p>
-            <p>{record.phone}</p>
-            <button>Delete</button>
-          </div>
-        ))}
+    <>
+      <div className="container">
+        <div className="nav">
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="contacts">Contact</NavLink>
+            </li>
+            <li>
+              <NavLink to="users">Users</NavLink>
+            </li>
+            <li>
+              <NavLink to="/services">Services</NavLink>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+      <Outlet />
+    </>
   );
 };
 
