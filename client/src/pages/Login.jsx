@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHref, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useToken } from "../Context__Store/Store";
-import { useEffect } from "react";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -11,8 +10,9 @@ const Login = () => {
     password: "",
   });
   const Navigate = useNavigate();
-  const { HandleToggle } = useToken();
+  const { state } = useToken();
 
+  const [hState, setHstate] = useState(!state);
   const { updateToken } = useToken();
 
   const handleOnChange = (e) => {
@@ -24,7 +24,9 @@ const Login = () => {
 
   const handleOnclick = async (e) => {
     e.preventDefault();
-
+    if (!hState) {
+      setHstate(state);
+    }
     await axios
       .post("http://localhost:3001/api/auth/login", {
         email: user.email,
@@ -33,6 +35,7 @@ const Login = () => {
       .then((res) => {
         alert(res.data.message);
         updateToken(res.data.token);
+
         if (res.status == 200) {
           Navigate("/");
         }
@@ -41,6 +44,7 @@ const Login = () => {
         alert(error.response.data);
       });
   };
+
   return (
     <div className="wrapper">
       <div className="logo">
@@ -73,7 +77,13 @@ const Login = () => {
             placeholder="Password"
           />
         </div>
-        <button className="btn mt-3" type="submit">
+        <button
+          className="btn mt-3"
+          type="submit"
+          onClick={() => {
+            useHref = "/";
+          }}
+        >
           Login
         </button>
       </form>

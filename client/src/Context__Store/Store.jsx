@@ -5,38 +5,45 @@ const TokenContext = createContext();
 
 export const TokenProvider = ({ children }) => {
   const [remToken, setRemToken] = useState(localStorage.getItem("token"));
+  const [state, setState] = useState(false);
   const [data, setData] = useState();
-  const updateToken = (newToken) => {
-    return localStorage.setItem("token", newToken);
-  };
 
-  const HandleToggle = !!remToken;
+  const updateToken = (newToken) => {
+    setRemToken(newToken);
+    localStorage.setItem("token", newToken);
+  };
 
   const deleteToken = () => {
     setRemToken("");
-    return localStorage.removeItem("token");
+    localStorage.removeItem("token");
   };
+
   const config = {
     headers: { Authorization: `Bearer ${remToken}` },
   };
-  const userAuthentication = async () => {
-    try {
-      await axios
-        .get("http://localhost:3001/api/auth/user", config)
-        .then((res) => {
-          setData(res.data.msg);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   useEffect(() => {
-    userAuthentication();
-  }, []);
+    const userAuthentication = async () => {
+      try {
+        await axios
+          .get("http://localhost:3001/api/auth/user", config)
+          .then((res) => {
+            setData(res.data.msg);
+            setState(true);
+          });
+      } catch (error) {}
+    };
+
+    if (remToken) {
+      userAuthentication();
+    }
+  }, [remToken]);
+
+  const HandleToggle = !!remToken;
 
   return (
     <TokenContext.Provider
-      value={{ updateToken, deleteToken, HandleToggle, data }}
+      value={{ updateToken, deleteToken, HandleToggle, data, state }}
     >
       {children}
     </TokenContext.Provider>

@@ -6,16 +6,14 @@ import { Button } from "react-bootstrap";
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const { HandleToggle, state, deleteToken } = useToken();
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
-  const { deleteToken } = useToken();
-  const { HandleToggle } = useToken();
 
   const handleToken = () => {
     deleteToken();
-    console.log("rendering ");
   };
 
   return (
@@ -66,7 +64,7 @@ const Navbar = () => {
                   Services
                 </NavLink>
               </li>
-              {HandleToggle ? (
+              {state && HandleToggle ? (
                 <li className="nav-item">
                   <Button className="nav-link" onClick={handleToken}>
                     LogOut
