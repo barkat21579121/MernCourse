@@ -1,4 +1,6 @@
 const express = require("express");
+const getAllUser = require("./Router/getAllUserData");
+const getAllContacs = require("./Router/getAllContacts");
 const router = require("./Router/index");
 const DbConnection = require("./Utils/Db");
 const app = express();
@@ -11,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", router);
 app.use("/api/form", ContactRoute);
+app.use("/api/admin", getAllUser);
+app.use("/api/admin", getAllContacs);
 
 app.use(errorHandler);
 const Port = 3001;

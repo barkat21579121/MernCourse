@@ -7,6 +7,7 @@ import Services from "./pages/Services";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Navbar from "./Components/Navbar/Navbar";
+import AdminPanel from "./Components/Admin/Admin";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin/users" element={<AdminPanel />} />
       </Routes>
     </BrowserRouter>
   );
