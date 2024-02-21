@@ -43,7 +43,7 @@ export const TokenProvider = ({ children }) => {
 
   return (
     <TokenContext.Provider
-      value={{ updateToken, deleteToken, HandleToggle, data, state }}
+      value={{ updateToken, deleteToken, HandleToggle, data, state, config }}
     >
       {children}
     </TokenContext.Provider>

@@ -4,6 +4,6 @@ const UserAuthMiddleWare = require("../middleware-Validator/AuthMiddleWare");
 
 const router = express.Router();
 
-router.get("/contacs", UserAuthMiddleWare, getAllContacts);
+router.get("/contacts", UserAuthMiddleWare, getAllContacts);
 
 module.exports = router;

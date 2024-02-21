@@ -77,13 +77,7 @@ const Login = () => {
             placeholder="Password"
           />
         </div>
-        <button
-          className="btn mt-3"
-          type="submit"
-          onClick={() => {
-            useHref = "/";
-          }}
-        >
+        <button className="btn mt-3" type="submit">
           Login
         </button>
       </form>

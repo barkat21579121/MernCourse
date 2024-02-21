@@ -11,5 +11,14 @@ const getAllUserData = async (req, res) => {
     console.log("error", error);
   }
 };
+const getSingleUserData = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await Users.findOne({ _id: id }, { password: 0 });
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(401).send(error);
+  }
+};
 
-module.exports = getAllUserData;
+module.exports = { getAllUserData, getSingleUserData };

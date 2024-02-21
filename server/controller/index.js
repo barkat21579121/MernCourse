@@ -74,4 +74,14 @@ const User = async (req, res) => {
     console.log(error);
   }
 };
-module.exports = { Home, register, LoginUser, User };
+//*___________________
+//* Logic for Delete user
+//*___________________
+
+const deleteUser = async (req, res) => {
+  const id = req.params.id;
+  await Users.deleteOne({ _id: id });
+  res.status(200).send({ message: "User Deleted SucessFully" });
+};
+
+module.exports = { Home, register, LoginUser, User, deleteUser };
