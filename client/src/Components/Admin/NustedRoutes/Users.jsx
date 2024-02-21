@@ -69,7 +69,7 @@ const Users = () => {
                       background: "white",
                     }}
                   >
-                    <Link to={`admin/users/${item._id}/edit`}>Update</Link>
+                    <Link to={`/admin/users/${item._id}/edit`}>Update</Link>
                   </Button>
                 </td>
               </tr>

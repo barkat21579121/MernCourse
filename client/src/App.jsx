@@ -10,6 +10,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import AdminPanel from "./Components/Admin/Admin";
 import Users from "./Components/Admin/NustedRoutes/Users";
 import Contacts from "./Components/Admin/NustedRoutes/Contact";
+import UpdateUser from "./Components/Admin/NustedRoutes/UpdateUser";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/admin" element={<AdminPanel />}>
           <Route path="users" element={<Users />} />
           <Route path="contacts" element={<Contacts />} />
+          <Route path="users/:id/edit" element={<UpdateUser />} />
         </Route>
       </Routes>
     </BrowserRouter>
