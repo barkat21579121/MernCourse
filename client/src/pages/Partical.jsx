@@ -80,7 +80,7 @@ export const Particless = () => {
               type: "circle",
               stroke: {
                 width: 2,
-                color: "red",
+                color: "black",
               },
               style: {
                 position: "absolute",

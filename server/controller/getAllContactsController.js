@@ -11,4 +11,14 @@ const getAllContacts = async (req, res) => {
     console.log(error);
   }
 };
-module.exports = getAllContacts;
+const deleteUserData = async (req, res, next) => {
+  const id = req.params.id;
+  await Contact.deleteOne({ _id: id });
+  try {
+    res.status(200).json({ message: "user Deleted SucessFully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAllContacts, deleteUserData };

@@ -7,7 +7,11 @@ import { Button } from "react-bootstrap";
 const Contacts = () => {
   const [data, setData] = useState([]);
   const { config } = useToken();
+
   useEffect(() => {
+    fetchData();
+  }, [config]);
+  const fetchData = () => {
     axios
       .get("http://localhost:3001/api/admin/contacts", config)
       .then((res) => {
@@ -18,7 +22,18 @@ const Contacts = () => {
       .catch((error) => {
         console.log("error", error);
       });
-  }, []);
+  };
+
+  const deleteUser = async (id) => {
+    await axios
+      .delete(`http://localhost:3001/api/admin/contact/${id}`, config)
+      .then(() => {
+        fetchData();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <div style={{ maxWidth: "80%", margin: "0 auto" }}>
@@ -38,7 +53,11 @@ const Contacts = () => {
                 <td>{item.email}</td>
                 <td>{item.message}</td>
                 <td>
-                  <Button type="button" className="btn btn-danger">
+                  <Button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => deleteUser(item._id)}
+                  >
                     Delete
                   </Button>{" "}
                   <Button type="button" className="btn btn-success">

@@ -18,4 +18,5 @@ const UserAuthMiddleWare = async (req, res, next) => {
     next();
   } catch (error) {}
 };
+
 module.exports = UserAuthMiddleWare;
