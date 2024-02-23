@@ -6,3 +6,6 @@
   ) !important;
   border-radius: 5px;
 }
+* {
+  font-family: Roboto !important;
+}
