@@ -12,11 +12,14 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 // Value Import
-import { information, socials } from "../EditMe";
+import { information, socials } from "../EditMe.js";
+import { Particless } from "./Partical.jsx";
+// import { Particless } from "./Partical.js";
 
 function Profile() {
   return (
-    <Container fluid className="profile-row">
+    <Container fluid className="profile-row" style={{ position: "relative" }}>
+      {<Particless />}
       <Row className="row">
         <Col className="column-greeting" xs={12} lg={4}>
           <p className="greeting-sub">{information.welcomeMsg}</p>
